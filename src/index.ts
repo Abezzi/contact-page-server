@@ -2,6 +2,7 @@ import * as express from "express"
 import * as bodyParser from "body-parser"
 import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
+import * as morgan from "morgan"
 import { Routes } from "./routes"
 import { User } from "./entity/User"
 import { port } from "./config"
@@ -14,6 +15,10 @@ function handleError(err, req, res, next) {
 AppDataSource.initialize().then(async () => {
     // create express app
     const app = express()
+    
+    // morgan (API Logging)
+    app.use(morgan('tiny'))
+    
     app.use(bodyParser.json())
 
     // register express routes from defined application routes
