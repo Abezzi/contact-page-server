@@ -4,6 +4,7 @@ import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
 import { User } from "./entity/User"
+import { port } from "./config"
 
 // middleware function
 function handleError(err, req, res, next) {
@@ -31,8 +32,8 @@ AppDataSource.initialize().then(async () => {
     app.use(handleError)
 
     // start express server
-    app.listen(3000)
+    app.listen(port)
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
+    console.log(`Express server has started on port ${port}.`)
 
 }).catch(error => console.log(error))
